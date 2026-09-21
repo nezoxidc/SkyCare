@@ -1,7 +1,88 @@
 <!DOCTYPE html>
-<html>
-<head><title>SkyCare</title></head>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>SkyCare Frontend</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f9;
+    }
+    h1 {
+      color: #1a365d;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .status {
+      font-weight: bold;
+      color: #2b6cb0;
+    }
+  </style>
+</head>
 <body>
-  <h1>SkyCare Frontend is running!</h1>
+
+  <div class="card">
+    <h1>SkyCare Users</h1>
+    <p class="status" id="loading">Загрузка данных с сервера...</p>
+    <ul id="users-list"></ul>
+  </div>
+
+  <script>
+    // Замените URL на точный адрес вашего бэкенда на Render
+    const BACKEND_URL = 'https://skycare-backend.onrender.com/users';
+
+    async function loadUsers() {
+      const loadingEl = document.getElementById('loading');
+      const listEl = document.getElementById('users-list');
+
+      try {
+        const response = await fetch(BACKEND_URL);
+        if (!response.ok) {
+          throw new Error(`Ошибка сервера: ${response.status}`);
+        }
+
+        const data = await response.json();
+        loadingEl.innerText = `Успешно загружено пользователей: ${data.count}`;
+
+        if (data.users.length === 0) {
+          listEl.innerHTML = '<li>База данных пока пуста.</li>';
+          return;
+        }
+
+        listEl.innerHTML = '';
+        data.users.forEach(user => {
+          const li = document.createElement('li');
+          // Берем поля из вашей таблицы (например name/email или username/id)
+          // Если имя колонки другое, просто подправьте user.name / user.email
+          const name = user.name || user.username || user.email || JSON.stringify(user);
+          li.innerText = `👤 ${name}`;
+          listEl.appendChild(li);
+        });
+
+      } catch (error) {
+        console.error('Ошибка при запросе:', error);
+        loadingEl.style.color = 'red';
+        loadingEl.innerText = 'Не удалось загрузить данные с бэкенда.';
+      }
+    }
+
+    // Запускаем загрузку после открытия страницы
+    loadUsers();
+  </script>
+
 </body>
 </html>
