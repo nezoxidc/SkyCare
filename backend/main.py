@@ -4,16 +4,13 @@ from sqlalchemy import create_engine, text
 
 app = FastAPI(title="SkyCare API")
 
-# Получаем ссылку на базу данных из переменных окружения
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Корректируем формат префикса для SQLAlchemy
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 
 def get_db_engine():
-    """Вспомогательная функция для подключения к БД"""
     if not DATABASE_URL:
         raise HTTPException(
             status_code=500,
@@ -45,16 +42,16 @@ def check_db_connection():
         )
 
 
-@app.get("/userz")
+@app.get("/users")
 def get_users():
-    """Получение списка пациентов из базы данных"""
+    """Получение списка пользователей из базы данных"""
     try:
         engine = get_db_engine()
         with engine.connect() as connection:
-            # Выполняем SQL-запрос к таблице users
+            # Запрос к таблице users
             result = connection.execute(text("SELECT * FROM users LIMIT 50;"))
 
-            # Преобразуем результаты в список словарей
+            # Преобразуем строки таблицы в список словарей
             users = [dict(row._mapping) for row in result]
 
             return {
