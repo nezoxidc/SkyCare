@@ -43,5 +43,5 @@ SkyCare — это полнофункциональное веб-приложе�
 
 ### 1. Клонирование репозитория
 ```bash
-git clone [https://github.com/nezoxidc/SkyCare.git](https://github.com/nezoxidc/SkyCare.git)
+git clone https://github.com/nezoxidc/SkyCare.git
 cd SkyCare
