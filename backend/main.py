@@ -1,8 +1,19 @@
 import os
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, text
 
 app = FastAPI(title="SkyCare API")
+
+# Настройка CORS
+# Разрешаем запросы со всех доменов (в продакшене можно ограничить адресом фронтенда)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -48,12 +59,8 @@ def get_users():
     try:
         engine = get_db_engine()
         with engine.connect() as connection:
-            # Запрос к таблице users
             result = connection.execute(text("SELECT * FROM users LIMIT 50;"))
-
-            # Преобразуем строки таблицы в список словарей
             users = [dict(row._mapping) for row in result]
-
             return {
                 "count": len(users),
                 "users": users
