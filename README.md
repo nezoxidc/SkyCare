@@ -1,46 +1,30 @@
-# 🏥 SkyCare — Full-Stack Web Application
+# SkyCare
 
-SkyCare — это полнофункциональное веб-приложение для работы с пользователями, построенное на архитектуре **FastAPI + PostgreSQL + Static Frontend** и автоматически развернутое в облаке **Render**.
+SkyCare — проект для организации помощи пассажирам при задержках авиарейсов: трансфер, размещение в гостинице и хранение багажа в соответствии с применимыми требованиями ФАП-82.
 
----
+## Репозитории
 
-## 🚀 Деплой (Live Demos)
+- [Backend](https://github.com/nezoxidc/SkyCare-backend) — серверная часть приложения.
+- [Frontend](https://github.com/nezoxidc/SkyCare-frontend) — пользовательский интерфейс.
+- [Wiki](https://github.com/nezoxidc/SkyCare/wiki) — база знаний и техническая документация.
+- [Issues](https://github.com/nezoxidc/SkyCare/issues) — задачи главного репозитория.
 
-- **Frontend:** [https://skycare-frontend.onrender.com](https://skycare-frontend.onrender.com)
-- **Backend API:** [https://skycare-backend.onrender.com](https://skycare-backend.onrender.com)
-- **Swagger / OpenAPI Docs:** [https://skycare-backend.onrender.com/docs](https://skycare-backend.onrender.com/docs)
+## Архитектура
 
----
+- **Frontend:** HTML, CSS, JavaScript, Nginx.
+- **Backend:** Python, FastAPI.
+- **Database:** PostgreSQL.
+- **Deployment:** Ubuntu Server, Docker Compose.
+- **CI:** GitHub Actions в репозиториях Backend и Frontend.
 
-## 🛠️ Архитектура и стек технологий
+## Работа над проектом
 
-### **Backend**
-- **Python 3.14 / FastAPI** — высокопроизводительный асинхронный REST API фреймворк.
-- **SQLAlchemy** — ORM для работы с базами данных и выполнения SQL-запросов.
-- **Psycopg2 / Uvicorn** — драйвер БД и ASGI-сервер.
-- **CORS Middleware** — разграничение доступа между фронтендом и бэкендом.
+1. Найдите задачу в GitHub Issues или общем GitHub Project.
+2. Вносите изменения в соответствующий репозиторий.
+3. Создавайте Pull Request и проверяйте GitHub Actions.
+4. После проверки объединяйте изменения в `main`.
+5. Обновляйте Wiki при изменении архитектуры или инструкций.
 
-### **Database**
-- **PostgreSQL (Render)** — облачная реляционная база данных.
+## Документация
 
-### **Frontend**
-- **HTML5 / CSS3 / JavaScript (ES6+)** — динамический клиент со встроенной валидацией и отправкой запросов через `fetch()`.
-
----
-
-## 📡 Эндпоинты API (API Endpoints)
-
-| Метод | Эндпоинт | Описание |
-| :--- | :--- | :--- |
-| `GET` | `/docs` | Проверка работоспособности сервиса |
-| `GET` | `/health/db` | Проверка подключения бэкенда к PostgreSQL |
-| `GET` | `/users` | Получение списка всех пользователей из БД |
-
----
-
-## 💻 Локальный запуск (Local Setup)
-
-### 1. Клонирование репозитория
-```bash
-git clone https://github.com/nezoxidc/SkyCare.git
-cd SkyCare
+Подробные инструкции по архитектуре, разработке, базе данных и развёртыванию находятся в [GitHub Wiki](https://github.com/nezoxidc/SkyCare/wiki).
